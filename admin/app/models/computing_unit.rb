@@ -1,0 +1,2 @@
+class ComputingUnit < ApplicationRecord
+end
