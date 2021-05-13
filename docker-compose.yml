@@ -6,16 +6,14 @@ services:
       context: .
     volumes:
       - "./edge.conf:/usr/local/openresty/nginx/conf/nginx.conf"
-      - "./nott.html:/usr/local/openresty/nginx/index.html"
       - "./src/:/lua/src/"
     depends_on:
       - ingest
-      - admin
     links:
       - ingest
-      - admin
     ports:
       - "8080:8080"
+      - "9090:9090"
 
   ingest: # back end
     build:
