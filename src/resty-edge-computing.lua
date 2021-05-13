@@ -51,7 +51,7 @@ end
 
 edge_computing.fetch_code = function()
   local httpc = http.new()
-  httpc:set_timeout(edge_computing.api_timeout)
+  httpc:set_timeout(edge_computing.api_timeout * 1000)
   local res_api, err_api = httpc:request_uri(edge_computing.api_uri)
 
   if err_api ~= nil and type(err_api) == "string" and err_api ~= "" then
