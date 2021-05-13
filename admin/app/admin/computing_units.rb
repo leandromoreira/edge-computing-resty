@@ -1,18 +1,13 @@
 ActiveAdmin.register ComputingUnit do
-
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  #
   permit_params :name, :phase, :code, :sampling
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:name, :phase, :code, :sampling]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
   
+  form do |f|
+    f.inputs "Player Type" do
+      f.input :name
+      f.input :phase, as: :select, collection: ComputingUnit::PHASE_OPTIONS
+      f.input :code, :as => :text
+      f.input :sampling, :as => :number
+    end
+    actions
+  end
 end
