@@ -8,8 +8,10 @@ services:
       - "./edge.conf:/usr/local/openresty/nginx/conf/nginx.conf"
       - "./src/:/lua/src/"
     depends_on:
+      - admin
       - ingest
     links:
+      - admin
       - ingest
     ports:
       - "8080:8080"
