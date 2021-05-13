@@ -1,0 +1,58 @@
+version: '2.1'
+
+services:
+  edge: # front end
+    build:
+      context: .
+    volumes:
+      - "./edge.conf:/usr/local/openresty/nginx/conf/nginx.conf"
+      - "./nott.html:/usr/local/openresty/nginx/index.html"
+      - "./src/:/lua/src/"
+    depends_on:
+      - ingest
+      - admin
+    links:
+      - ingest
+      - admin
+    ports:
+      - "8080:8080"
+
+  ingest: # back end
+    build:
+      context: .
+      dockerfile: Dockerfile.ingest
+    volumes:
+      - "./ingest.conf:/config/nginx.conf"
+    ports:
+      - "1935:1935"
+
+  admin:
+    build: ./admin
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - ./admin:/myapp
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=secret
+      - DB_NAME=admin
+
+  db:
+    image: mysql:5.6
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=admin
+
+  lint:
+    command: bash -c "luacheck -q ."
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    volumes:
+      - ".:/lua/"
+    working_dir: "/lua"
+
