@@ -28,7 +28,7 @@ services:
 
   admin:
     build: ./admin
-    command: bash -c "./scripts/wait-for.sh db 3306 && rake db:migrate:reset && rake db:seed && rails s -p 3000 -b '0.0.0.0'"
+    command: bash -c "./scripts/wait-for.sh db 3306 && rails db:migrate && rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - ./admin:/myapp
     ports:
@@ -43,6 +43,8 @@ services:
 
   db:
     image: mysql:5.6
+    volumes:
+      - "./mysqldata:/var/lib/mysql"
     environment:
       - MYSQL_ROOT_PASSWORD=secret
       - MYSQL_DATABASE=admin

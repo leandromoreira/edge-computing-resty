@@ -35,7 +35,7 @@ edge_computing.spawn_poller = function()
   local worker_interval_seconds = edge_computing.interval + jitter_seconds
 
   -- scheduling recurring a polling
-  ngx.timer.every(edge_computing.interval, edge_computing.fetch_code)
+  ngx.timer.every(worker_interval_seconds, edge_computing.fetch_code)
 
   -- polling right away (in the next nginx "cicle")
   -- to avoid all the workers to go downstream we add a jitter of 60s
