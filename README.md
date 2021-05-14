@@ -36,3 +36,10 @@ http http://localhost:8080/hls/colorbar.m3u8
 # but if you pass the super token, then it's going to work fine :)
 http http://localhost:8080/hls/colorbar.m3u8?token=token
 ```
+
+# Future work
+
+* Federated coding units (maybe using the domain)
+* Some form of lua sandboxing
+* Publish it as a rock
+* Add measurements
