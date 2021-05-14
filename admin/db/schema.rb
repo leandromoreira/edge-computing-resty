@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2021_05_13_192719) do
 
-  create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
     t.string "resource_type"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2021_05_13_192719) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
-  create_table "admin_users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "admin_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -38,15 +38,7 @@ ActiveRecord::Schema.define(version: 2021_05_13_192719) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
-  create_table "channels", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.string "label"
-    t.integer "segment_duration_ms"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["label"], name: "index_channels_on_label", unique: true
-  end
-
-  create_table "computing_units", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "computing_units", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "phase"
     t.string "code"
@@ -55,35 +47,4 @@ ActiveRecord::Schema.define(version: 2021_05_13_192719) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "renditions", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.string "label"
-    t.string "path"
-    t.bigint "video_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["video_id"], name: "index_renditions_on_video_id"
-  end
-
-  create_table "schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.integer "video_index"
-    t.integer "segments_count"
-    t.bigint "channel_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "video_id"
-    t.datetime "airing_time"
-    t.index ["channel_id"], name: "index_schedules_on_channel_id"
-    t.index ["video_id"], name: "index_schedules_on_video_id"
-  end
-
-  create_table "videos", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.string "label"
-    t.integer "duration_ms"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_foreign_key "renditions", "videos"
-  add_foreign_key "schedules", "channels"
-  add_foreign_key "schedules", "videos"
 end
