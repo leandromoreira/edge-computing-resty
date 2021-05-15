@@ -39,7 +39,10 @@ http http://localhost:8080/hls/colorbar.m3u8?token=token
 
 # Future work
 
-* Federated coding units (maybe using the domain)
-* Some form of lua sandboxing
+* Federated functions
+  * maybe using the domain to shard and sum with a global domain *
+* Some form of lua sandboxing 
+  * since [luajit can't enforce](https://github.com/Kong/kong-lua-sandbox) quota, one might use the admin phase to run the code and mesure the time, check syntax, security?!
+* Provide a API hook for authentication
 * Publish it as a rock
 * Add measurements
