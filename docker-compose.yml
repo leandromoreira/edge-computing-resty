@@ -32,6 +32,8 @@ services:
     command: "/scripts/ffmpeg_colorbar.sh"
     volumes:
       - "./:/scripts"
+    environment:
+      - INGEST_HOST=ingest
     depends_on:
       - ingest
     links:
