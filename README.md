@@ -2,6 +2,10 @@
 
 During our hackday, we created a simple edge computing platform using nginx, lua and rails. The ideas is to inject lua code into a running nginx through a CMS.
 
+## Demo
+
+https://user-images.githubusercontent.com/55913/118967200-ce974e00-b940-11eb-89ab-d4366e360dc9.mp4
+
 ## Quick start
 
 ```bash
