@@ -1,3 +1,6 @@
+> **Warning**
+> There's a more robust and complete solution available called [lua-resty-dynacode](https://github.com/leandromoreira/lua-resty-dynacode#quick-start)
+
 # Edge computing resty
 
 During our hackday, we created a simple edge computing platform using nginx, lua and rails. The ideas is to inject lua code into a running nginx through a CMS.
